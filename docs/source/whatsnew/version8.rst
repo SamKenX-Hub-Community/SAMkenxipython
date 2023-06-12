@@ -1,6 +1,123 @@
 ============
  8.x Series
 ============
+.. _version 8.14:
+
+IPython 8.14
+------------
+
+Small release of IPython.
+
+ - :ghpull:`14080` fixes some shortcuts issues.
+ - :ghpull:`14056` Add option to ``%autoreload`` to hide errors when reloading code. This will be the default for spyder
+   user is my understanding.
+ - :ghpull:`14039` (and :ghpull:`14040`) to show exception notes in tracebacks.
+
+ - :ghpull:`14076` Add option to EventManager to prevent printing
+
+
+SPEC 0 and SPEC 4
+~~~~~~~~~~~~~~~~~
+
+You've heard about the NEPs, (NumPy enhancement Proposal), having a NEP for something non-numpy specific was sometime confusing.
+Long live the `SPECs <https://scientific-python.org/specs/>`_.
+
+We are now trying to follow SPEC 0 (aka old NEP 29) for of support of upstream libraries.
+
+We also now try to follow SPEC 4 (test and publish nightly on a centralized nightly repository).
+We encourage you to do so as well in order to report breakage, and contribute to the SPEC process !
+
+
+Python 3.12 compatibility ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python 3.12 changed its tokenizer to have better support for f-strings and allow arbitrary expression.
+This is a great new feature and performance improvement in python 3.12.
+
+Unfortunately this means the new tokenizer does not support incomplete or invalid Python which will
+break many features of IPython. Thus compatibility of IPython with Python 3.12 is not guarantied.
+It is unclear to which extent IPython is affected, and whether we can/should try to still support magics, shell
+escape (``! ....``), ...,  as well as how to do it if we can.
+
+In addition even if we there is technical feasibility to do so, it is no clear we have the resources to do it.
+We are thus looking for your help if you can _test_ on Python 3.12 to see to which extent this affects users and which
+features are critical.
+
+We are not going to pin IPython to Python ``<3.12`` as otherwise on install pip would downgrade/resolve to IPython 8.13,
+so if you plan to update to Python 3.12 after its release, we encourage for extra care.
+
+
+.. _version 8.13.1:
+.. _version 8.13.2:
+.. _version 8.12.3:
+
+IPython 8.13.1, 8.13.2 and 8.12.2
+---------------------------------
+
+3 quick in succession patch release of IPython in addition to IPython 8.13.0
+having been yanked.
+
+IPython 8.13.0 was improperly tagged as still compatible with Python 3.8, and
+still had some mention of compatibility woth 3.8. IPython 8.13.1 is identical to
+8.13 but with the exception of being correctly tagged. This release and yank was
+mostly done to fix CI.
+
+IPython 8.12.2 and 8.13.2 contain UI fixes, with respect to right arrow not
+working in some case in the terminal, and 8.12.2 contain also a requested
+backport of :ghpull:`14029` (Allow safe access to the ``__getattribute__``
+method of modules) for tab completion.
+
+.. _version 8.13:
+
+IPython 8.13
+------------
+
+As usual for the end of the month, minor release of IPython. This release is
+significant in that it not only has a number of bugfixes, but also drop support
+for Python 3.8 as per NEP 29 (:ghpull:`14023`).
+
+All the critical bugfixes have been backported onto the 8.12.1 release (see
+below). In addition to that went into 8.12.1 you'll find:
+
+ - Pretty reprensentation for ``Counter`` has been fixed to match the Python one
+   and be in decreasing order. :ghpull:`14032`
+ - Module completion is better when jedi is disabled :ghpull:`14029`.
+ - Improvment of ``%%bash`` magic that would get stuck :ghpull:`14019`
+
+
+We hope you enjoy this release an will maybe see you at JupyterCon in less than
+two weeks.
+
+As usual you can find the full list of PRs on GitHub under `the 8.12.1 milestone
+<https://github.com/ipython/ipython/milestone/115?closed=1>`__.
+
+Thanks to the D.E. Shaw group for the request and sponsoring the work.
+
+
+.. _version 8.12.1:
+
+IPython 8.12.1
+--------------
+
+This is the twin release of IPython 8.13 that contain only critical UI and bug
+fixes. The next minor version of IPython has dropped support for Python 3.8 – as
+per Nep 29 and this IPython 8.12.x will now only receive bugfixes.
+
+
+ - :ghpull:`14004` Fix a bug introduced in IPython 8.12 that crash when
+   inspecting some docstrings.
+ - :ghpull:`14010` Fix fast traceback code that was not working in some case.
+ - :ghpull:`14014` Fix ``%page`` magic broken in some case.
+ - :ghpull:`14026`, :ghpull:`14027` Tweak default shortcut with respect to
+   autosuggestions.
+ - :ghpull:`14033` add back the ability to use ``.get()`` on OInfo object for
+   backward compatibility with h5py (this will be re-deprecated later, and h5py
+   will also get a fix).
+
+As usual you can find the full list of PRs on GitHub under `the 8.12.1 milestone
+<https://github.com/ipython/ipython/milestone/116?closed=1>`__.
+
+Thanks to the D.E. Shaw group for the request and sponsoring the work.
 
 .. _version 8.12.0:
 
